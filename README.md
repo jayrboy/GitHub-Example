@@ -1,20 +1,20 @@
 #### 4-12-2023
 
 # Git (Version Control)
-	การกระจาย code เพื่อ clone ไปในแต่ละเครื่อง local และกลับไปรวม code ที่ server
 
+- การกระจาย code เพื่อ clone ไปในแต่ละเครื่อง local และกลับไปรวม code ที่ server
 - หลักการพื้นฐาน
-	แก้ไข code ได้ทุกที่ ทุกเวลา จะเก็บอยู่ในเครื่อง local -> แก้ไข -> sync -> update server
+  - แก้ไข code ได้ทุกที่ ทุกเวลา จะเก็บอยู่ในเครื่อง local -> แก้ไข -> sync -> update server
 - ทำไมต้องใช้
-	ติดตาม version
-	ป้องกัน version
-
+  - ติดตาม version
+  - ป้องกัน version
 
 # Github (Git Server)
+
 - สร้าง repository (Web)
-	https://github.com/new
-	- Public
-	- Private
+- https://github.com/new
+  - Public
+  - Private
 
 # Git bash Command
 
@@ -29,13 +29,14 @@ git config --list
 - เครื่องอื่น ใช้เสร็จต้อง unset ด้วย
 
 # Git Work Flow
-- Directory (ยังไม่มีการติดตาม)					
-- Directory (Tracked) มีการติดตาม	git init		กระบวน
-- Staging Area			git add		กระบวนการเอาไฟล์ไปเก็บ
-- Local Repository		git commit      การเก็บข้อมูลเครื่องของผู้พัฒนา
-- Git Server			git push 	อัปเดตขึ้นเซิฟเวอร์
 
-# ลบไฟล์
+- Directory (ยังไม่มีการติดตาม)
+- Directory (Tracked) มีการติดตาม git init กระบวน
+- Staging Area git add กระบวนการเอาไฟล์ไปเก็บ
+- Local Repository git commit การเก็บข้อมูลเครื่องของผู้พัฒนา
+- Git Server git push อัปเดตขึ้นเซิฟเวอร์
+
+# ลบไฟล์ทั้งหมด กับ บางไฟล์
 
 ```sh
 git rm -r -cached .
@@ -43,6 +44,7 @@ git rm --cached index.html
 ```
 
 # สร้างไฟล์
+
 - vscode -> terminal -> git bash
 
 ```sh
@@ -52,8 +54,8 @@ touch index.html
 git init
 git status		# ยังไม่มีการติดตามจะเป็นตัว U = Untrack (No commit yet)
 
-$ git add index.html				
-$ git rm --cached index.html		
+$ git add index.html
+$ git rm --cached index.html
 ```
 
 # Add ทุกไฟล์
@@ -70,10 +72,12 @@ git log --oneline
 git commit -m "Log Message"
 git commit -m "add file to project"
 ```
+
 <commit_id>: a3ece5e15aca62c54ac3d93df35c9021efbafd03
 ID ของ Version นี้มากี่เวอร์ชั่นแล้ว
 
 # แก้ไขไฟล์
+
 - app.js
 
 ```sh
@@ -88,7 +92,7 @@ git log --oneline   		# เพื่อเอา ID
 git diff a3ece5e eda		# V แรกอยู่ด้านล่าง
 ```
 
-# Check out  กลับไป version ก่อนหน้า หรือ ยกเลิกการแก้ไขไฟล์
+# Check out กลับไป version ก่อนหน้า หรือ ยกเลิกการแก้ไขไฟล์
 
 ```sh
 git checkout <file-name>
@@ -101,17 +105,18 @@ git reset --option
 git reset readme.txt
 git reset --option <commit_id>
 ```
--	soft	: ลบ all commit ที่อยู่หลัง Commit ID แล้วนำไฟล์ที่เคยอยู่ใน Commit นั้นกลับมา Staging Area
--	mixed	: ลบ all commit ที่อยู่หลัง Commit ID แล้วนำไฟล์ที่เคยอยู่ใน Commit นั้นกลับมา Working Directory
--	hard	: ลบ all commit ที่อยู่หลัง Commit ID แล้ว ทำลายไฟล์ที่เคยอยู่ใน Commit
+
+- soft : ลบ all commit ที่อยู่หลัง Commit ID แล้วนำไฟล์ที่เคยอยู่ใน Commit นั้นกลับมา Staging Area
+- mixed : ลบ all commit ที่อยู่หลัง Commit ID แล้วนำไฟล์ที่เคยอยู่ใน Commit นั้นกลับมา Working Directory
+- hard : ลบ all commit ที่อยู่หลัง Commit ID แล้ว ทำลายไฟล์ที่เคยอยู่ใน Commit
 
 ```sh
 git reset --hard e1933bf
 git show HEAD
 ```
 
-
 ##### Git Branching
+
 ## add
 
 ```sh
@@ -130,6 +135,7 @@ git branch
 ```
 
 #### How to
+
 # new branch "report-sale" and new source code
 
 ```sh
@@ -146,9 +152,18 @@ $ git commit -m "add report-sale"
 ```
 
 # Switched to branch master
+
 # ไม่ถูกแก้ไขเพราะว่าไปแก้ไขใน branch report-sale
 
 ```sh
 $ git branch
 $ git checkout master
+```
+
+# Revert Commit (โดยไม่ลบไฟล์ปัจจุบัน)
+
+```sh
+git revert HEAD
+git revert <commit_id>
+git revert -n <commit_id>
 ```
